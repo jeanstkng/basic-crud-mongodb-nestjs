@@ -25,10 +25,9 @@ export class UsuarioController {
     }
 
     @Get('/:usuarioID')
-    async getUsuario(@Res() res, @Param('usuarioID') usuarioID, @Query('token') token ) {
+    async getUsuario(@Res() res, @Param('usuarioID') usuarioID ) {
         const usuario = await this.usuarioService.getUsuario(usuarioID);
         if(!usuario) throw new NotFoundException('Usuario no existe');
-        if(!token || token !== 'ABCDEFG') throw new NotFoundException('Token requerido');
         return res.status(HttpStatus.OK).json(
             usuario
         );
